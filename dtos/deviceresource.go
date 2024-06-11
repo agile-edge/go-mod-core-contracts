@@ -5,7 +5,7 @@
 
 package dtos
 
-import "github.com/edgexfoundry/go-mod-core-contracts/v3/models"
+import "github.com/agile-edgex/go-mod-core-contracts/v3/models"
 
 type DeviceResource struct {
 	Description string                 `json:"description" yaml:"description"`

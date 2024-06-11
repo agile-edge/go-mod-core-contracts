@@ -15,9 +15,9 @@ import (
 
 	"github.com/google/uuid"
 
-	"github.com/edgexfoundry/go-mod-core-contracts/v3/common"
-	edgexErrors "github.com/edgexfoundry/go-mod-core-contracts/v3/errors"
-	"github.com/edgexfoundry/go-mod-core-contracts/v3/models"
+	"github.com/agile-edgex/go-mod-core-contracts/v3/common"
+	edgexErrors "github.com/agile-edgex/go-mod-core-contracts/v3/errors"
+	"github.com/agile-edgex/go-mod-core-contracts/v3/models"
 )
 
 type BaseReading struct {
@@ -177,7 +177,7 @@ func convertFloatValue(valueType string, kind reflect.Kind, value interface{}) (
 		return "", err
 	}
 
-	return fmt.Sprintf("%e", value), nil
+	return fmt.Sprintf("%f", value), nil
 }
 
 func convertSimpleArrayValue(valueType string, kind reflect.Kind, value interface{}) (string, error) {

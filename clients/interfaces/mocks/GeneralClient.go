@@ -5,9 +5,9 @@ package mocks
 import (
 	context "context"
 
-	common "github.com/edgexfoundry/go-mod-core-contracts/v3/dtos/common"
+	common "github.com/agile-edgex/go-mod-core-contracts/v3/dtos/common"
 
-	errors "github.com/edgexfoundry/go-mod-core-contracts/v3/errors"
+	errors "github.com/agile-edgex/go-mod-core-contracts/v3/errors"
 
 	mock "github.com/stretchr/testify/mock"
 )

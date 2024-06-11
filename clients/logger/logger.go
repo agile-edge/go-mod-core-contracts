@@ -18,15 +18,15 @@ to write logs to a local file rather than sending them to a service.
 */
 package logger
 
-// Logging client for the Go implementation of edgexfoundry
+// Logging client for the Go implementation of agile-edgex
 
 import (
 	"fmt"
 	stdLog "log"
 	"os"
 
-	"github.com/edgexfoundry/go-mod-core-contracts/v3/errors"
-	"github.com/edgexfoundry/go-mod-core-contracts/v3/models"
+	"github.com/agile-edgex/go-mod-core-contracts/v3/errors"
+	"github.com/agile-edgex/go-mod-core-contracts/v3/models"
 
 	"github.com/go-kit/log"
 )

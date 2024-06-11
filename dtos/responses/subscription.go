@@ -6,8 +6,8 @@
 package responses
 
 import (
-	"github.com/edgexfoundry/go-mod-core-contracts/v3/dtos"
-	"github.com/edgexfoundry/go-mod-core-contracts/v3/dtos/common"
+	"github.com/agile-edgex/go-mod-core-contracts/v3/dtos"
+	"github.com/agile-edgex/go-mod-core-contracts/v3/dtos/common"
 )
 
 // SubscriptionResponse defines the Subscription Content for GET Subscription DTOs.

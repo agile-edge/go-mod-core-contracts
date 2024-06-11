@@ -5,7 +5,7 @@
 
 package dtos
 
-import "github.com/edgexfoundry/go-mod-core-contracts/v3/models"
+import "github.com/agile-edgex/go-mod-core-contracts/v3/models"
 
 type DeviceCommand struct {
 	Name               string              `json:"name" yaml:"name" validate:"required,edgex-dto-none-empty-string"`
