@@ -3,7 +3,7 @@
 
 This module contains the contract models used to describe data as it is passed via Request/Response between various
 EdgeX Foundry services. It also contains service clients for each service within the
-[edgex-go](https://github.com/agile-edgex/edgex-go) repository. The definition of the various models and clients can
+[edgex](https://github.com/agile-edgex/edgex) repository. The definition of the various models and clients can
 be found in their respective top-level directories.
 
 The default encoding for the models is JSON, although in at least one case --

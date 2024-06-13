@@ -8,5 +8,6 @@ package models
 type AutoEvent struct {
 	Interval   string
 	OnChange   bool
+	Step       float64
 	SourceName string
 }

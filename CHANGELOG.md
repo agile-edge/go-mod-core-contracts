@@ -487,7 +487,7 @@
 <a name="v0.1.111"></a>
 ## [v0.1.111] - 2020-10-23
 ### Code Refactoring ♻
-- Rename constant to match edgex-go funce ([#5ae68de](https://github.com/agile-edgex/go-mod-core-contracts/commits/5ae68de))
+- Rename constant to match edgex funce ([#5ae68de](https://github.com/agile-edgex/go-mod-core-contracts/commits/5ae68de))
 
 <a name="v0.1.110"></a>
 ## [v0.1.110] - 2020-10-23
