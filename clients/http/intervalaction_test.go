@@ -12,11 +12,11 @@ import (
 	"path"
 	"testing"
 
-	"github.com/agile-edgex/go-mod-core-contracts/v3/common"
-	"github.com/agile-edgex/go-mod-core-contracts/v3/dtos"
-	dtoCommon "github.com/agile-edgex/go-mod-core-contracts/v3/dtos/common"
-	"github.com/agile-edgex/go-mod-core-contracts/v3/dtos/requests"
-	"github.com/agile-edgex/go-mod-core-contracts/v3/dtos/responses"
+	"github.com/agile-edge/go-mod-core-contracts/v3/common"
+	"github.com/agile-edge/go-mod-core-contracts/v3/dtos"
+	dtoCommon "github.com/agile-edge/go-mod-core-contracts/v3/dtos/common"
+	"github.com/agile-edge/go-mod-core-contracts/v3/dtos/requests"
+	"github.com/agile-edge/go-mod-core-contracts/v3/dtos/responses"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

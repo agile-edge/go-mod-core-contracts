@@ -9,13 +9,14 @@ package common
 
 import (
 	"encoding/json"
-	"github.com/google/uuid"
 	"testing"
+
+	"github.com/google/uuid"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"github.com/agile-edgex/go-mod-core-contracts/v3/common"
+	"github.com/agile-edge/go-mod-core-contracts/v3/common"
 )
 
 func TestNewConfigResponse(t *testing.T) {

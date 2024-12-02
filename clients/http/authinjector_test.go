@@ -8,7 +8,7 @@ package http
 import (
 	"net/http"
 
-	"github.com/agile-edgex/go-mod-core-contracts/v3/clients/interfaces"
+	"github.com/agile-edge/go-mod-core-contracts/v3/clients/interfaces"
 )
 
 type emptyAuthenticationInjector struct {
