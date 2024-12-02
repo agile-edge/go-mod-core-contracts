@@ -8,7 +8,7 @@ package common
 import (
 	"github.com/google/uuid"
 
-	"github.com/agile-edgex/go-mod-core-contracts/v3/common"
+	"github.com/agile-edge/go-mod-core-contracts/v3/common"
 )
 
 // BaseRequest defines the base content for request DTOs (data transfer objects).

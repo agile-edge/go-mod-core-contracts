@@ -9,11 +9,11 @@ import (
 	"encoding/json"
 	"os"
 
-	"github.com/agile-edgex/go-mod-core-contracts/v3/common"
-	"github.com/agile-edgex/go-mod-core-contracts/v3/dtos"
-	dtoCommon "github.com/agile-edgex/go-mod-core-contracts/v3/dtos/common"
-	"github.com/agile-edgex/go-mod-core-contracts/v3/errors"
-	"github.com/agile-edgex/go-mod-core-contracts/v3/models"
+	"github.com/agile-edge/go-mod-core-contracts/v3/common"
+	"github.com/agile-edge/go-mod-core-contracts/v3/dtos"
+	dtoCommon "github.com/agile-edge/go-mod-core-contracts/v3/dtos/common"
+	"github.com/agile-edge/go-mod-core-contracts/v3/errors"
+	"github.com/agile-edge/go-mod-core-contracts/v3/models"
 
 	"github.com/fxamacker/cbor/v2"
 )

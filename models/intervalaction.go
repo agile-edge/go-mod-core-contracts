@@ -8,7 +8,7 @@ package models
 import (
 	"encoding/json"
 
-	"github.com/agile-edgex/go-mod-core-contracts/v3/errors"
+	"github.com/agile-edge/go-mod-core-contracts/v3/errors"
 )
 
 // AuthMethod controls the authentication method to be applied to outbound http requests for interval actions

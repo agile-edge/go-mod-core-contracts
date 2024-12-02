@@ -20,7 +20,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/agile-edgex/go-mod-core-contracts/v3/dtos/common"
+	"github.com/agile-edge/go-mod-core-contracts/v3/dtos/common"
 )
 
 // SystemEvent defines the data for a system event

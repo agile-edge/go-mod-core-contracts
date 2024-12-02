@@ -8,9 +8,9 @@ package interfaces
 import (
 	"context"
 
-	"github.com/agile-edgex/go-mod-core-contracts/v3/dtos/common"
-	"github.com/agile-edgex/go-mod-core-contracts/v3/dtos/requests"
-	"github.com/agile-edgex/go-mod-core-contracts/v3/errors"
+	"github.com/agile-edge/go-mod-core-contracts/v3/dtos/common"
+	"github.com/agile-edge/go-mod-core-contracts/v3/dtos/requests"
+	"github.com/agile-edge/go-mod-core-contracts/v3/errors"
 )
 
 // DeviceServiceCallbackClient defines the interface for interactions with the callback endpoint on the EdgeX Foundry device service.

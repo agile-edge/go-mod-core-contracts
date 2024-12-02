@@ -8,7 +8,7 @@ package dtos
 import (
 	"encoding/json"
 
-	"github.com/agile-edgex/go-mod-core-contracts/v3/models"
+	"github.com/agile-edge/go-mod-core-contracts/v3/models"
 )
 
 type TransmissionRecord struct {

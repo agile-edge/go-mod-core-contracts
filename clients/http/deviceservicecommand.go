@@ -11,12 +11,12 @@ import (
 	"encoding/json"
 	"net/url"
 
-	"github.com/agile-edgex/go-mod-core-contracts/v3/clients/http/utils"
-	"github.com/agile-edgex/go-mod-core-contracts/v3/clients/interfaces"
-	"github.com/agile-edgex/go-mod-core-contracts/v3/common"
-	dtoCommon "github.com/agile-edgex/go-mod-core-contracts/v3/dtos/common"
-	"github.com/agile-edgex/go-mod-core-contracts/v3/dtos/responses"
-	"github.com/agile-edgex/go-mod-core-contracts/v3/errors"
+	"github.com/agile-edge/go-mod-core-contracts/v3/clients/http/utils"
+	"github.com/agile-edge/go-mod-core-contracts/v3/clients/interfaces"
+	"github.com/agile-edge/go-mod-core-contracts/v3/common"
+	dtoCommon "github.com/agile-edge/go-mod-core-contracts/v3/dtos/common"
+	"github.com/agile-edge/go-mod-core-contracts/v3/dtos/responses"
+	"github.com/agile-edge/go-mod-core-contracts/v3/errors"
 
 	"github.com/fxamacker/cbor/v2"
 )

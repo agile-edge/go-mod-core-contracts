@@ -17,7 +17,8 @@ package models
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/agile-edgex/go-mod-core-contracts/v3/errors"
+
+	"github.com/agile-edge/go-mod-core-contracts/v3/errors"
 )
 
 // These constants identify the log levels in order of increasing severity.

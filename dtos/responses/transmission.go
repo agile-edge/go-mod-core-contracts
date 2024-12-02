@@ -6,8 +6,8 @@
 package responses
 
 import (
-	"github.com/agile-edgex/go-mod-core-contracts/v3/dtos"
-	"github.com/agile-edgex/go-mod-core-contracts/v3/dtos/common"
+	"github.com/agile-edge/go-mod-core-contracts/v3/dtos"
+	"github.com/agile-edge/go-mod-core-contracts/v3/dtos/common"
 )
 
 // TransmissionResponse defines the Response Content for GET Transmission DTO.

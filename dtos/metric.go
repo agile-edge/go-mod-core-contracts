@@ -20,7 +20,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/agile-edgex/go-mod-core-contracts/v3/dtos/common"
+	"github.com/agile-edge/go-mod-core-contracts/v3/dtos/common"
 )
 
 // Metric defines the metric data for a specific named metric

@@ -8,9 +8,9 @@ package interfaces
 import (
 	"context"
 
-	"github.com/agile-edgex/go-mod-core-contracts/v3/dtos/common"
-	"github.com/agile-edgex/go-mod-core-contracts/v3/dtos/responses"
-	"github.com/agile-edgex/go-mod-core-contracts/v3/errors"
+	"github.com/agile-edge/go-mod-core-contracts/v3/dtos/common"
+	"github.com/agile-edge/go-mod-core-contracts/v3/dtos/responses"
+	"github.com/agile-edge/go-mod-core-contracts/v3/errors"
 )
 
 // DeviceServiceCommandClient defines the interface for interactions with the device command endpoints on the EdgeX Foundry device services.
