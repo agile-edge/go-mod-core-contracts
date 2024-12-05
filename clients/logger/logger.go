@@ -22,13 +22,12 @@ package logger
 
 import (
 	"fmt"
-	stdLog "log"
+	"go.uber.org/zap"
+	"go.uber.org/zap/zapcore"
 	"os"
+	"strings"
 
 	"github.com/agile-edge/go-mod-core-contracts/v3/errors"
-	"github.com/agile-edge/go-mod-core-contracts/v3/models"
-
-	"github.com/go-kit/log"
 )
 
 // LoggingClient defines the interface for logging operations.
@@ -44,8 +43,6 @@ type LoggingClient interface {
 	Error(msg string, args ...interface{})
 	// Info logs a message at the INFO severity level
 	Info(msg string, args ...interface{})
-	// Trace logs a message at the TRACE severity level
-	Trace(msg string, args ...interface{})
 	// Warn logs a message at the WARN severity level
 	Warn(msg string, args ...interface{})
 	// Debugf logs a formatted message at the DEBUG severity level
@@ -54,156 +51,104 @@ type LoggingClient interface {
 	Errorf(msg string, args ...interface{})
 	// Infof logs a formatted message at the INFO severity level
 	Infof(msg string, args ...interface{})
-	// Tracef logs a formatted message at the TRACE severity level
-	Tracef(msg string, args ...interface{})
 	// Warnf logs a formatted message at the WARN severity level
 	Warnf(msg string, args ...interface{})
 }
 
-type edgeXLogger struct {
-	owningServiceName string
-	logLevel          *string
-	rootLogger        log.Logger
-	levelLoggers      map[string]log.Logger
+func parseLevel(logLevel string) zapcore.Level {
+	level, err := zapcore.ParseLevel(logLevel)
+	if err != nil {
+		level = zap.InfoLevel
+	}
+	return level
 }
 
 // NewClient creates an instance of LoggingClient
 func NewClient(owningServiceName string, logLevel string) LoggingClient {
-	if !isValidLogLevel(logLevel) {
-		logLevel = models.InfoLog
+	level := zap.NewAtomicLevelAt(parseLevel(logLevel))
+	//配置zap日志库的编码器
+	encoder := zapcore.EncoderConfig{
+		TimeKey:          "timestamp",
+		LevelKey:         "level",
+		NameKey:          "logger",
+		CallerKey:        "caller",
+		MessageKey:       "msg",
+		StacktraceKey:    "stack",
+		EncodeTime:       zapcore.TimeEncoderOfLayout("2006-01-02 15:04:05.000"),
+		LineEnding:       zapcore.DefaultLineEnding,
+		EncodeLevel:      CapitalLevelEncoder,
+		EncodeDuration:   zapcore.SecondsDurationEncoder,
+		EncodeCaller:     ShortCallerEncoder,
+		ConsoleSeparator: " ",
 	}
 
-	// Set up logging client
-	lc := edgeXLogger{
-		owningServiceName: owningServiceName,
-		logLevel:          &logLevel,
+	logFilename := "app"
+	if owningServiceName != "" {
+		logFilename = strings.ReplaceAll(owningServiceName, "/", "-")
 	}
-
-	lc.rootLogger = log.NewLogfmtLogger(os.Stdout)
-	lc.rootLogger = log.WithPrefix(
-		lc.rootLogger,
-		"ts",
-		log.DefaultTimestampUTC,
-		"app",
-		owningServiceName,
-		"source",
-		log.Caller(5))
-
-	// Set up the loggers
-	lc.levelLoggers = map[string]log.Logger{}
-
-	for _, logLevel := range logLevels() {
-		lc.levelLoggers[logLevel] = log.WithPrefix(lc.rootLogger, "level", logLevel)
+	//日志切割
+	writeSyncer := getLogWriter(logFilename)
+	//设置日志级别
+	var core zapcore.Core
+	writers := []zapcore.WriteSyncer{zapcore.AddSync(writeSyncer)}
+	if getEnv(LogStdout, "true") != "false" {
+		writers = append(writers, zapcore.AddSync(os.Stdout))
 	}
-
-	return lc
+	core = zapcore.NewCore(
+		zapcore.NewConsoleEncoder(encoder),
+		zapcore.NewMultiWriteSyncer(writers...),
+		level,
+	)
+	logger := zap.New(core,
+		zap.AddStacktrace(zap.NewAtomicLevelAt(zapcore.ErrorLevel)),
+		zap.AddCaller(),
+		zap.AddCallerSkip(1),
+		zap.Development(),
+	)
+	return &zapLogger{log: logger, Sync: logger.Sync, level: level}
 }
 
-// LogLevels returns an array of the possible log levels in order from most to least verbose.
-func logLevels() []string {
-	return []string{
-		models.TraceLog,
-		models.DebugLog,
-		models.InfoLog,
-		models.WarnLog,
-		models.ErrorLog}
-}
-
-func isValidLogLevel(l string) bool {
-	for _, name := range logLevels() {
-		if name == l {
-			return true
-		}
-	}
-	return false
-}
-
-func (lc edgeXLogger) log(logLevel string, formatted bool, msg string, args ...interface{}) {
-	// Check minimum log level
-	for _, name := range logLevels() {
-		if name == *lc.logLevel {
-			break
-		}
-		if name == logLevel {
-			return
-		}
-	}
-
-	if args == nil {
-		args = []interface{}{"msg", msg}
-	} else if formatted {
-		args = []interface{}{"msg", fmt.Sprintf(msg, args...)}
-	} else {
-		if len(args)%2 == 1 {
-			// add an empty string to keep k/v pairs correct
-			args = append(args, "")
-		}
-		if len(msg) > 0 {
-			args = append(args, "msg", msg)
-		}
-	}
-
-	err := lc.levelLoggers[logLevel].Log(args...)
-	if err != nil {
-		stdLog.Fatal(err.Error())
-		return
-	}
-
-}
-
-func (lc edgeXLogger) SetLogLevel(logLevel string) errors.EdgeX {
-	if isValidLogLevel(logLevel) {
-		*lc.logLevel = logLevel
-
+func (lc zapLogger) SetLogLevel(logLevel string) errors.EdgeX {
+	if level, err := zapcore.ParseLevel(logLevel); err == nil {
+		lc.level.SetLevel(level)
 		return nil
 	}
 
 	return errors.NewCommonEdgeX(errors.KindContractInvalid, fmt.Sprintf("invalid log level `%s`", logLevel), nil)
 }
 
-func (lc edgeXLogger) LogLevel() string {
-	if lc.logLevel == nil {
-		return ""
-	}
-	return *lc.logLevel
+func (lc zapLogger) LogLevel() string {
+	return lc.level.String()
 }
 
-func (lc edgeXLogger) Info(msg string, args ...interface{}) {
-	lc.log(models.InfoLog, false, msg, args...)
+func (lc zapLogger) Info(msg string, args ...interface{}) {
+	lc.log.Sugar().Infof(msg, args...)
 }
 
-func (lc edgeXLogger) Trace(msg string, args ...interface{}) {
-	lc.log(models.TraceLog, false, msg, args...)
+func (lc zapLogger) Debug(msg string, args ...interface{}) {
+	lc.log.Sugar().Debugf(msg, args...)
 }
 
-func (lc edgeXLogger) Debug(msg string, args ...interface{}) {
-	lc.log(models.DebugLog, false, msg, args...)
+func (lc zapLogger) Warn(msg string, args ...interface{}) {
+	lc.log.Sugar().Warnf(msg, args...)
 }
 
-func (lc edgeXLogger) Warn(msg string, args ...interface{}) {
-	lc.log(models.WarnLog, false, msg, args...)
+func (lc zapLogger) Error(msg string, args ...interface{}) {
+	lc.log.Sugar().Errorf(msg, args...)
 }
 
-func (lc edgeXLogger) Error(msg string, args ...interface{}) {
-	lc.log(models.ErrorLog, false, msg, args...)
+func (lc zapLogger) Infof(msg string, args ...interface{}) {
+	lc.log.Sugar().Infof(msg, args...)
 }
 
-func (lc edgeXLogger) Infof(msg string, args ...interface{}) {
-	lc.log(models.InfoLog, true, msg, args...)
+func (lc zapLogger) Debugf(msg string, args ...interface{}) {
+	lc.log.Sugar().Debugf(msg, args...)
 }
 
-func (lc edgeXLogger) Tracef(msg string, args ...interface{}) {
-	lc.log(models.TraceLog, true, msg, args...)
+func (lc zapLogger) Warnf(msg string, args ...interface{}) {
+	lc.log.Sugar().Warnf(msg, args...)
 }
 
-func (lc edgeXLogger) Debugf(msg string, args ...interface{}) {
-	lc.log(models.DebugLog, true, msg, args...)
-}
-
-func (lc edgeXLogger) Warnf(msg string, args ...interface{}) {
-	lc.log(models.WarnLog, true, msg, args...)
-}
-
-func (lc edgeXLogger) Errorf(msg string, args ...interface{}) {
-	lc.log(models.ErrorLog, true, msg, args...)
+func (lc zapLogger) Errorf(msg string, args ...interface{}) {
+	lc.log.Sugar().Errorf(msg, args...)
 }
