@@ -14,4 +14,4 @@ loggingClient.Info("Something interesting")
 loggingClient.Infof("Starting %s %s ", internal.CoreDataServiceKey, edgex.Version)
 loggingClient.Errorf("Something bad happened: %s", err.Error())
 ```
-Log messages can be logged as Info, Debug, Trace, Warn, or Error
+Log messages can be logged as Info, Debug, Warn, or Error

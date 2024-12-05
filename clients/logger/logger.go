@@ -22,10 +22,11 @@ package logger
 
 import (
 	"fmt"
-	"go.uber.org/zap"
-	"go.uber.org/zap/zapcore"
 	"os"
 	"strings"
+
+	"go.uber.org/zap"
+	"go.uber.org/zap/zapcore"
 
 	"github.com/agile-edge/go-mod-core-contracts/v3/errors"
 )
@@ -37,8 +38,6 @@ type LoggingClient interface {
 	SetLogLevel(logLevel string) errors.EdgeX
 	// LogLevel returns the current log level setting
 	LogLevel() string
-	// Trace logs a message at the TRACE severity level
-	Trace(msg string, args ...interface{})
 	// Debug logs a message at the DEBUG severity level
 	Debug(msg string, args ...interface{})
 	// Error logs a message at the ERROR severity level
@@ -47,8 +46,6 @@ type LoggingClient interface {
 	Info(msg string, args ...interface{})
 	// Warn logs a message at the WARN severity level
 	Warn(msg string, args ...interface{})
-	// Tracef logs a message at the TRACE severity level
-	Tracef(msg string, args ...interface{})
 	// Debugf logs a formatted message at the DEBUG severity level
 	Debugf(msg string, args ...interface{})
 	// Errorf logs a formatted message at the ERROR severity level
@@ -155,10 +152,4 @@ func (lc zapLogger) Warnf(msg string, args ...interface{}) {
 
 func (lc zapLogger) Errorf(msg string, args ...interface{}) {
 	lc.log.Sugar().Errorf(msg, args...)
-}
-
-func (lc zapLogger) Trace(msg string, args ...interface{}) {
-}
-
-func (lc zapLogger) Tracef(msg string, args ...interface{}) {
 }

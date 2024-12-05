@@ -91,22 +91,6 @@ func (_m *LoggingClient) SetLogLevel(logLevel string) errors.EdgeX {
 	return r0
 }
 
-// Trace provides a mock function with given fields: msg, args
-func (_m *LoggingClient) Trace(msg string, args ...interface{}) {
-	var _ca []interface{}
-	_ca = append(_ca, msg)
-	_ca = append(_ca, args...)
-	_m.Called(_ca...)
-}
-
-// Tracef provides a mock function with given fields: msg, args
-func (_m *LoggingClient) Tracef(msg string, args ...interface{}) {
-	var _ca []interface{}
-	_ca = append(_ca, msg)
-	_ca = append(_ca, args...)
-	_m.Called(_ca...)
-}
-
 // Warn provides a mock function with given fields: msg, args
 func (_m *LoggingClient) Warn(msg string, args ...interface{}) {
 	var _ca []interface{}
