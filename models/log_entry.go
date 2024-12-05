@@ -23,6 +23,7 @@ import (
 
 // These constants identify the log levels in order of increasing severity.
 const (
+	TraceLog = "TRACE"
 	DebugLog = "DEBUG"
 	InfoLog  = "INFO"
 	WarnLog  = "WARN"
@@ -75,7 +76,7 @@ func (le *LogEntry) UnmarshalJSON(data []byte) error {
 // Validate satisfies the Validator interface
 func (le LogEntry) Validate() (bool, errors.EdgeX) {
 	if !le.isValidated {
-		logLevels := []string{DebugLog, InfoLog, WarnLog, ErrorLog}
+		logLevels := []string{TraceLog, DebugLog, InfoLog, WarnLog, ErrorLog}
 		for _, name := range logLevels {
 			if name == le.Level {
 				return true, nil
