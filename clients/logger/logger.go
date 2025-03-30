@@ -23,12 +23,14 @@ package logger
 
 import (
 	"fmt"
+	"io"
 	stdLog "log"
 	"os"
 
 	"github.com/agile-edge/go-mod-core-contracts/v4/models"
 
 	"github.com/go-kit/log"
+	"gopkg.in/natefinch/lumberjack.v2"
 )
 
 // LoggingClient defines the interface for logging operations.
@@ -79,7 +81,24 @@ func NewClient(owningServiceName string, logLevel string) LoggingClient {
 		logLevel:          &logLevel,
 	}
 
-	lc.rootLogger = log.NewLogfmtLogger(os.Stdout)
+	config := loadLogConfig()
+	// 1. 初始化 Lumberjack
+	logFile := &lumberjack.Logger{
+		Filename:   config.FilePath,
+		MaxSize:    config.MaxSize,    // MB
+		MaxBackups: config.MaxBackups, // 保留旧日志数量
+		MaxAge:     config.MaxAge,     // 保留天数
+		Compress:   config.Compress,   // 是否压缩
+	}
+	// 2. 根据配置决定输出目标（文件 + 控制台或仅文件）
+	var output io.Writer
+	if config.ConsoleOutput {
+		output = io.MultiWriter(logFile, os.Stdout) // 多目标输出
+	} else {
+		output = logFile
+	}
+	// 3. 创建 Go-Kit Logger
+	lc.rootLogger = log.NewLogfmtLogger(log.NewSyncWriter(output))
 	lc.rootLogger = log.WithPrefix(
 		lc.rootLogger,
 		"ts",
