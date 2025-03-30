@@ -12,14 +12,14 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/edgexfoundry/go-mod-core-contracts/v4/clients"
-	"github.com/edgexfoundry/go-mod-core-contracts/v4/clients/http/utils"
-	"github.com/edgexfoundry/go-mod-core-contracts/v4/clients/interfaces"
-	"github.com/edgexfoundry/go-mod-core-contracts/v4/common"
-	dtoCommon "github.com/edgexfoundry/go-mod-core-contracts/v4/dtos/common"
-	"github.com/edgexfoundry/go-mod-core-contracts/v4/dtos/requests"
-	"github.com/edgexfoundry/go-mod-core-contracts/v4/dtos/responses"
-	"github.com/edgexfoundry/go-mod-core-contracts/v4/errors"
+	"github.com/agile-edge/go-mod-core-contracts/v4/clients"
+	"github.com/agile-edge/go-mod-core-contracts/v4/clients/http/utils"
+	"github.com/agile-edge/go-mod-core-contracts/v4/clients/interfaces"
+	"github.com/agile-edge/go-mod-core-contracts/v4/common"
+	dtoCommon "github.com/agile-edge/go-mod-core-contracts/v4/dtos/common"
+	"github.com/agile-edge/go-mod-core-contracts/v4/dtos/requests"
+	"github.com/agile-edge/go-mod-core-contracts/v4/dtos/responses"
+	"github.com/agile-edge/go-mod-core-contracts/v4/errors"
 )
 
 type ProvisionWatcherClient struct {

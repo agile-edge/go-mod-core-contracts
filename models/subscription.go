@@ -8,7 +8,7 @@ package models
 import (
 	"encoding/json"
 
-	"github.com/edgexfoundry/go-mod-core-contracts/v4/errors"
+	"github.com/agile-edge/go-mod-core-contracts/v4/errors"
 )
 
 type Subscription struct {

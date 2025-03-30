@@ -5,7 +5,7 @@
 
 package responses
 
-import "github.com/edgexfoundry/go-mod-core-contracts/v4/dtos/common"
+import "github.com/agile-edge/go-mod-core-contracts/v4/dtos/common"
 
 type UnitsOfMeasureResponse struct {
 	common.BaseResponse `json:",inline"`

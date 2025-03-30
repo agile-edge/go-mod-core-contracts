@@ -6,8 +6,8 @@
 package responses
 
 import (
-	"github.com/edgexfoundry/go-mod-core-contracts/v4/dtos"
-	"github.com/edgexfoundry/go-mod-core-contracts/v4/dtos/common"
+	"github.com/agile-edge/go-mod-core-contracts/v4/dtos"
+	"github.com/agile-edge/go-mod-core-contracts/v4/dtos/common"
 )
 
 // ProvisionWatcherResponse defines the Response Content for GET ProvisionWatcher DTOs.

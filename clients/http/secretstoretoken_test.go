@@ -10,8 +10,8 @@ import (
 	"net/http"
 	"testing"
 
-	"github.com/edgexfoundry/go-mod-core-contracts/v4/common"
-	dtoCommon "github.com/edgexfoundry/go-mod-core-contracts/v4/dtos/common"
+	"github.com/agile-edge/go-mod-core-contracts/v4/common"
+	dtoCommon "github.com/agile-edge/go-mod-core-contracts/v4/dtos/common"
 
 	"github.com/stretchr/testify/require"
 )

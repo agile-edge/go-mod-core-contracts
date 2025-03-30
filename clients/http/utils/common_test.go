@@ -11,7 +11,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/edgexfoundry/go-mod-core-contracts/v4/models"
+	"github.com/agile-edge/go-mod-core-contracts/v4/models"
 
 	"github.com/stretchr/testify/assert"
 )

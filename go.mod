@@ -1,4 +1,4 @@
-module github.com/edgexfoundry/go-mod-core-contracts/v4
+module github.com/agile-edge/go-mod-core-contracts/v4
 
 go 1.23
 

@@ -8,8 +8,8 @@ package interfaces
 import (
 	"context"
 
-	"github.com/edgexfoundry/go-mod-core-contracts/v4/dtos/responses"
-	"github.com/edgexfoundry/go-mod-core-contracts/v4/errors"
+	"github.com/agile-edge/go-mod-core-contracts/v4/dtos/responses"
+	"github.com/agile-edge/go-mod-core-contracts/v4/errors"
 )
 
 // ScheduleActionRecordClient defines the interface for interactions with the ScheduleActionRecord endpoint on the EdgeX Foundry support-scheduler service.

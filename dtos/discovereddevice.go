@@ -5,7 +5,7 @@
 
 package dtos
 
-import "github.com/edgexfoundry/go-mod-core-contracts/v4/models"
+import "github.com/agile-edge/go-mod-core-contracts/v4/models"
 
 type DiscoveredDevice struct {
 	ProfileName string         `json:"profileName" yaml:"profileName" validate:"len=0|edgex-dto-none-empty-string"`
